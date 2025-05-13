@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Главная — Тесты</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>Добро пожаловать в систему тестирования</h1>
+
+<a href="/tests/create">Создать новый тест</a>
+
+<h2>Список тестов</h2>
+<ul>
+    <li th:each="test : ${tests}">
+        <strong th:text="${test.title}">Название теста</strong><br>
+
+        <a th:href="@{/tests/{id}(id=${test.id})}">Посмотреть</a> |
+        <a th:href="@{/tests/take/{id}(id=${test.id})}">Пройти</a> |
+        <a th:href="@{/questions/add/{id}(id=${test.id})}">Добавить вопрос</a> |
+
+        <!-- Кнопка удаления -->
+        <form th:action="@{/tests/delete/{id}(id=${test.id})}" method="post" style="display:inline">
+            <button type="submit"
+                    onclick="return confirm('Вы уверены, что хотите удалить тест «[[${test.title}]]» вместе со всеми вопросами и ответами?')">
+                Удалить
+            </button>
+        </form>
+    </li>
+</ul>
+
+</body>
+</html>

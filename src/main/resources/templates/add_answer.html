@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Добавить ответ</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<h2>Добавить ответ к вопросу</h2>
+
+<p th:if="${error}" th:text="${error}" style="color:red;"></p>
+
+<form th:action="@{/answers/add}" th:object="${answer}" method="post">
+    <input type="hidden" th:field="*{question.id}" />
+
+    <label>Текст ответа:
+        <input type="text" th:field="*{content}" required />
+    </label>
+    <br><br>
+
+    <label>Правильный ответ:
+        <input type="radio" name="correctRadio" value="true" onclick="setCorrect(true)"> Да
+        <input type="radio" name="correctRadio" value="false" onclick="setCorrect(false)" checked> Нет
+    </label>
+    <input type="hidden" th:field="*{correct}" id="correctField" />
+    <br><br>
+
+    <button type="submit">Сохранить</button>
+</form>
+
+<script>
+    function setCorrect(value) {
+        document.getElementById('correctField').value = value;
+    }
+</script>
+
+<a th:href="@{/questions/view/{id}(id=${questionId})}">Назад к вопросу</a>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Добавить вопрос</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<h1>Добавление вопроса</h1>
+
+<form th:action="@{/questions/add}" th:object="${questionForm}" method="post">
+
+    <input type="hidden" th:field="*{testId}"/>
+
+    <label>Текст вопроса:<br>
+        <textarea th:field="*{content}" required></textarea>
+    </label><br><br>
+
+    <label>Правильный ответ:<br>
+        <input type="text" th:field="*{correctAnswer}" required />
+    </label><br><br>
+
+    <label>Неправильный ответ 1:<br>
+        <input type="text" th:field="*{wrongAnswer1}" required />
+    </label><br><br>
+
+    <label>Неправильный ответ 2:<br>
+        <input type="text" th:field="*{wrongAnswer2}" required />
+    </label><br><br>
+
+    <label>Неправильный ответ 3:<br>
+        <input type="text" th:field="*{wrongAnswer3}" required />
+    </label><br><br>
+
+    <button type="submit">Сохранить вопрос</button>
+</form>
+
+<a th:href="@{/tests/{id}(id=${questionForm.testId})}">Отмена</a>
+
+</body>
+</html>

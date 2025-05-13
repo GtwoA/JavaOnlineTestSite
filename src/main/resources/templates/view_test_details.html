@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Test Details</title>
+</head>
+<body>
+<h1 th:text="${test.title}">Test Title</h1>
+
+<h2>Questions:</h2>
+<ul>
+    <li th:each="question : ${test.questions}">
+        <p>
+            <strong th:text="${question.content}">Question</strong><br/>
+        <ul>
+            <li th:each="answer : ${question.answers}">
+                <span th:text="${answer.content}"></span>
+                <span th:if="${answer.correct}" style="color: green;">(Correct)</span>
+            </li>
+        </ul>
+        <a th:href="@{/answers/add/{id}(id=${question.id})}">Add Answer</a>
+        </p>
+    </li>
+</ul>
+
+<a th:href="@{/questions/add/{id}(id=${test.id})}">Add Question</a><br>
+<a th:href="@{/tests}">Back to All Tests</a>
+</body>
+</html>
