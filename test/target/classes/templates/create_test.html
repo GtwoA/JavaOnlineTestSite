@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Создать тест</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<h1>Создание нового теста</h1>
+
+<form th:action="@{/tests/create}" th:object="${test}" method="post">
+    <label>Название теста:
+        <input type="text" th:field="*{title}" required />
+    </label>
+    <br><br>
+
+    <button type="submit">Создать</button>
+</form>
+
+<a href="/tests">Назад к списку тестов</a>
+
+</body>
+</html>

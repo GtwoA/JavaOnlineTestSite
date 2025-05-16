@@ -1,0 +1,28 @@
+<body>
+<h1>Добро пожаловать в систему тестирования</h1>
+
+<a th:href="@{/login}">Выход</a>
+
+<p>Вы вошли как: <strong th:text="${userName}">Имя пользователя</strong> (<span th:text="${userRole}">Роль</span>)</p>
+
+<a href="/tests/create" th:if="${userRole == 'TEACHER'}">Создать новый тест</a>
+
+<h2>Список тестов</h2>
+<ul>
+    <li th:each="test : ${tests}">
+        <strong th:text="${test.title}">Название теста</strong><br>
+
+        <a th:href="@{/tests/{id}(id=${test.id})}">Посмотреть</a> |
+        <a th:href="@{/tests/take/{id}(id=${test.id})}">Пройти</a> |
+
+        <a th:href="@{/questions/add/{id}(id=${test.id})}" th:if="${userRole == 'TEACHER'}">Добавить вопрос</a> |
+
+        <form th:action="@{/tests/delete/{id}(id=${test.id})}" method="post" style="display:inline" th:if="${userRole == 'TEACHER'}">
+            <button type="submit"
+                    onclick="return confirm('Вы уверены, что хотите удалить тест «[[${test.title}]]» вместе со всеми вопросами и ответами?')">
+                Удалить
+            </button>
+        </form>
+    </li>
+</ul>
+</body>

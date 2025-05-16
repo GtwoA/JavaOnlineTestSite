@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Profile</title></head>
+<body>
+<h1>Profile of <span th:text="${user.fullName}">User Name</span></h1>
+<p>Email: <span th:text="${user.email}">Email</span></p>
+
+<h2>Your Test Attempts</h2>
+<table>
+  <thead>
+  <tr>
+    <th>Test Title</th>
+    <th>Score</th>
+    <th>Attempt Date</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="attempt : ${attempts}">
+    <td th:text="${attempt.test.title}">Test Title</td>
+    <td th:text="${attempt.score}">Score</td>
+    <td th:text="${attempt.attemptTime}">Date</td>
+  </tr>
+  </tbody>
+</table>
+
+<a href="/tests">Go to Test List</a>
+</body>
+</html>

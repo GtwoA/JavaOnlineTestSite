@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>View Test</title></head>
+<body>
+<h1 th:text="${test.title}">Test Title</h1>
+
+<div th:each="question : ${test.questions}">
+  <h3 th:text="${question.content}">Question</h3>
+  <ul>
+    <li th:each="answer : ${question.answers}">
+      <span th:text="${answer.content}">Answer</span>
+      <span th:if="${answer.correct}"></span>
+    </li>
+  </ul>
+</div>
+
+<a th:href="@{/tests/take/{id}(id=${test.id})}">Пройти тест</a>
+</body>
+</html>

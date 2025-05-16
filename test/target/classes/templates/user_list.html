@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список пользователей</title>
+</head>
+<body>
+
+<h1>Список пользователей</h1>
+
+<table border="1">
+    <tr>
+        <th>Email</th>
+        <th>ФИО</th>
+        <th>Роль</th>
+        <th>Действие</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.fullName}"></td>
+        <td th:text="${user.role.name}"></td>
+        <td>
+            <form th:action="@{/users/delete/{id}(id=${user.id})}" method="post">
+                <button type="submit" onclick="return confirm('Удалить пользователя?')">Удалить</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Test List</title></head>
+<body>
+<h1>Your Test List</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="test : ${tests}">
+        <td th:text="${test.title}">Test Title</td>
+        <td>
+            <a th:href="@{/tests/take/{id}(id=${test.id})}">Take Test</a> |
+            <a th:href="@{/tests/view/{id}(id=${test.id})}">View Test</a> |
+            <a th:href="@{/tests/delete/{id}(id=${test.id})}">Delete Test</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="/tests/create">Create a New Test</a>
+</body>
+</html>

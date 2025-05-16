@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Добавить ответы</title>
+    <meta charset="UTF-8">
+    <script>
+        function addAnswerField() {
+            const container = document.getElementById("answers-container");
+            const index = container.children.length;
+
+            const html = `
+                <div>
+                    <input type="text" name="answers[${index}].content" placeholder="Текст ответа" required />
+                    <label>
+                        <input type="checkbox" name="answers[${index}].correct" />
+                        Правильный
+                    </label>
+                </div>`;
+            container.insertAdjacentHTML('beforeend', html);
+        }
+    </script>
+</head>
+<body>
+
+<h2>Добавить ответы к вопросу</h2>
+
+<form th:action="@{/answers/add-multiple}" method="post">
+    <input type="hidden" name="questionId" th:value="${question.id}" />
+
+    <div id="answers-container">
+        <!-- как минимум 2 ответа по умолчанию -->
+        <div>
+            <input type="text" name="answers[0].content" placeholder="Текст ответа" required />
+            <label><input type="checkbox" name="answers[0].correct" /> Правильный</label>
+        </div>
+        <div>
+            <input type="text" name="answers[1].content" placeholder="Текст ответа" required />
+            <label><input type="checkbox" name="answers[1].correct" /> Правильный</label>
+        </div>
+    </div>
+
+    <button type="button" onclick="addAnswerField()">+ Добавить ещё</button><br><br>
+    <button type="submit">Сохранить все</button>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Take Test</title></head>
+<body>
+<h1 th:text="${test.title}">Take Test</h1>
+
+<form th:action="@{/tests/submit}" method="post">
+  <div th:each="question : ${test.questions}">
+    <h3 th:text="${question.content}">Question</h3>
+    <ul>
+      <li th:each="answer : ${question.answers}">
+        <label>
+          <input type="checkbox"
+                 th:name="${'question_' + question.id}"
+                 th:value="${answer.id}" />
+          <span th:text="${answer.content}">Answer</span>
+        </label>
+      </li>
+    </ul>
+
+  </div>
+
+  <button type="submit">Submit Test</button>
+</form>
+</body>
+</html>
